@@ -1,0 +1,259 @@
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+/** @var array $arParams */
+/** @var array $arResult */
+/** @global CMain $APPLICATION */
+/** @global CUser $USER */
+/** @global CDatabase $DB */
+/** @var CBitrixComponentTemplate $this */
+/** @var string $templateName */
+/** @var string $templateFile */
+/** @var string $templateFolder */
+/** @var string $componentPath */
+/** @var CBitrixComponent $component */
+$this->setFrameMode(true);
+$items = [];
+
+foreach ($arResult["ITEMS"] as $arItem) {
+	$items[$arItem["PROPERTIES"]["TYPE"]["VALUE"]][] = $arItem;
+}
+?>
+<div class="pricelist">
+	<div class="row">
+		<div class="col-12 col-lg-8 col-xl-8 order-2 order-lg-1">
+			<div class="pricelist__list">
+				<? foreach ($items as $name => $section) {?>
+					<div class="pricelist__list__item">
+						<div class="pricelist__card js--faq-card">
+							<div class="pricelist__card__head js--faq-title">
+								<div class="pricelist__card__head__text"><?=$name?></div>
+								<div class="pricelist__card__head__icon"><svg>
+									<use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-f-arrow-down2"></use>
+								</svg></div>
+							</div>
+							<div class="pricelist__card__content js--faq-slide">
+								<div class="pricelist__card__body">
+									<ul class="pricelist__prices">
+										<? foreach ($section as $item) { ?>
+											<li>
+												<div class="row align-items-center">
+													<div class="col-12 col-md-auto order-1 order-md-1">
+														<div class="pricelist__prices__title"><?=$item["NAME"]?></div>
+													</div>
+													<div class="col d-none d-md-block order-2">
+														<div class="pricelist__prices__line"></div>
+													</div>
+													<div class="col-6 col-md-auto order-4 order-md-3">
+														<div class="pricelist__prices__price"><?=$item["PROPERTIES"]["PRICE"]["VALUE"]?> руб.</div>
+													</div>
+													<div class="col-6 col-md-auto order-3 order-md-4">
+														<a class="pricelist__prices__btn" href="#">Записаться</a>
+													</div>
+												</div>
+											</li>
+										<? } ?>
+
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				<? } ?>
+			</div>
+		</div>
+		<div class="col-12 col-lg-4 col-xl-4 order-1 order-lg-2">
+			<div class="pricelist__cart">
+				<div class="pricelist__cart__body">
+					<div class="pricelist__cart__body__icon">
+						<svg width="86" height="93" viewBox="0 0 86 93" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M85.4874 60.379C85.477 57.5909 84.6165 54.8701 83.0172 52.5682C81.4179 50.2664 79.1535 48.4895 76.5165 47.4672L85.3458 14.9554C85.5302 14.263 85.5495 13.5381 85.4021 12.8371C85.2547 12.1362 84.9445 11.4783 84.4959 10.9147C84.0373 10.3866 83.4641 9.96649 82.8186 9.68516C82.1731 9.40383 81.4716 9.26849 80.7659 9.28911H16.081L14.5229 3.437C14.252 2.4473 13.6559 1.57354 12.8275 0.951873C11.9992 0.330205 10.985 -0.00445352 9.94305 4.47611e-05H0.5V9.28911H6.30748L18.0169 52.2975C18.2935 53.3108 18.9108 54.202 19.7682 54.8261C20.6255 55.4502 21.6724 55.7704 22.7384 55.7345H71.3229C72.5751 55.7345 73.776 56.2238 74.6615 57.0948C75.547 57.9658 76.0444 59.1472 76.0444 60.379C76.0444 61.6108 75.547 62.7922 74.6615 63.6632C73.776 64.5342 72.5751 65.0235 71.3229 65.0235H9.94305C8.69082 65.0235 7.48989 65.5129 6.60443 66.3839C5.71897 67.2549 5.22152 68.4363 5.22152 69.6681C5.22152 70.8999 5.71897 72.0812 6.60443 72.9523C7.48989 73.8233 8.69082 74.3126 9.94305 74.3126H15.5144C14.7379 76.4172 14.4884 78.6749 14.787 80.8944C15.0856 83.114 15.9235 85.2301 17.2299 87.0635C18.5362 88.8969 20.2724 90.3937 22.2915 91.4271C24.3106 92.4605 26.5531 93 28.8291 93C31.1052 93 33.3477 92.4605 35.3668 91.4271C37.3859 90.3937 39.1221 88.8969 40.4284 87.0635C41.7347 85.2301 42.5727 83.114 42.8713 80.8944C43.1699 78.6749 42.9204 76.4172 42.1438 74.3126H53.2866C52.5798 76.229 52.309 78.2746 52.4934 80.3051C52.6778 82.3356 53.3129 84.3016 54.3539 86.0644C55.3949 87.8271 56.8165 89.3437 58.5183 90.5071C60.2201 91.6705 62.1607 92.4524 64.2031 92.7976C66.2456 93.1428 68.3402 93.043 70.3392 92.5051C72.3382 91.9672 74.1928 91.0043 75.7722 89.6845C77.3517 88.3646 78.6175 86.7199 79.4803 84.8664C80.3431 83.0129 80.782 80.9957 80.7659 78.9571C80.7571 76.5576 80.1057 74.2027 78.8773 72.1297C80.8963 70.8775 82.5609 69.1437 83.7165 67.0894C84.8721 65.0351 85.4813 62.7269 85.4874 60.379ZM67.0263 46.4454H26.4684L18.6307 18.5782H74.6279L67.0263 46.4454ZM28.8291 83.6017C27.8953 83.6017 26.9825 83.3293 26.206 82.8189C25.4296 82.3086 24.8244 81.5832 24.467 80.7345C24.1097 79.8858 24.0162 78.952 24.1983 78.051C24.3805 77.1501 24.8302 76.3225 25.4905 75.673C26.1508 75.0234 26.9921 74.5811 27.908 74.4018C28.8239 74.2226 29.7733 74.3146 30.636 74.6661C31.4987 75.0177 32.2361 75.613 32.755 76.3768C33.2738 77.1406 33.5507 78.0385 33.5507 78.9571C33.5507 80.1889 33.0532 81.3703 32.1678 82.2413C31.2823 83.1123 30.0814 83.6017 28.8291 83.6017ZM66.6013 83.6017C65.6675 83.6017 64.7547 83.3293 63.9782 82.8189C63.2018 82.3086 62.5966 81.5832 62.2392 80.7345C61.8819 79.8858 61.7884 78.952 61.9705 78.051C62.1527 77.1501 62.6024 76.3225 63.2627 75.673C63.923 75.0234 64.7643 74.5811 65.6802 74.4018C66.5961 74.2226 67.5454 74.3146 68.4082 74.6661C69.2709 75.0177 70.0083 75.613 70.5272 76.3768C71.046 77.1406 71.3229 78.0385 71.3229 78.9571C71.3229 80.1889 70.8254 81.3703 69.94 82.2413C69.0545 83.1123 67.8536 83.6017 66.6013 83.6017Z" fill="currentColor" />
+						</svg>
+					</div>
+					<div class="pricelist__cart__body__content">
+						<div class="pricelist__cart__body__servicescount"><span>Услуги в корзине:</span><b>0</b></div>
+						<div class="pricelist__cart__body__summ"><span>Итоговая стоимость:</span><b>0 ₽</b></div>
+					</div>
+				</div>
+				<div class="pricelist__cart__footer">
+					<div class="pricelist__cart__footer__item">
+						<button class="mbtn mbtn__full mbtn__red d-block w-100" type="button">Записаться</button>
+					</div>
+					<div class="pricelist__cart__footer__item text-center">
+						<div class="link__more link__more__small js--linktoslide" data-href="#listslide"><span>Показать содержимое</span><i><svg>
+							<use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-right"></use>
+						</svg></i></div>
+					</div>
+					<div class="pricelist__cart__footer__item">
+						<div class="pricelist__cart__footer__slide js--blocktoslide" id="listslide">
+							<ul class="pricelist__cart__footer__list">
+								<li>
+									<div class="row flex-nowrap">
+										<div class="col">
+											<div class="pricelist__cart__footer__list__text">Прием врача-терапевта, первичный</div>
+										</div>
+										<div class="col-auto">
+											<div class="pricelist__cart__footer__list__price">14 500 ₽</div>
+										</div>
+										<div class="col-auto"><button class="pricelist__cart__footer__list__delete" type="button"><svg>
+											<use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-delete"></use>
+										</svg></button></div>
+									</div>
+								</li>
+								<li>
+									<div class="row flex-nowrap">
+										<div class="col">
+											<div class="pricelist__cart__footer__list__text">Прием врача-терапевта, первичный</div>
+										</div>
+										<div class="col-auto">
+											<div class="pricelist__cart__footer__list__price">14 500 ₽</div>
+										</div>
+										<div class="col-auto"><button class="pricelist__cart__footer__list__delete" type="button"><svg>
+											<use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-delete"></use>
+										</svg></button></div>
+									</div>
+								</li>
+								<li>
+									<div class="row flex-nowrap">
+										<div class="col">
+											<div class="pricelist__cart__footer__list__text">Прием врача-терапевта, первичный</div>
+										</div>
+										<div class="col-auto">
+											<div class="pricelist__cart__footer__list__price">14 500 ₽</div>
+										</div>
+										<div class="col-auto"><button class="pricelist__cart__footer__list__delete" type="button"><svg>
+											<use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-delete"></use>
+										</svg></button></div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация корзины
+    let cart = {
+        items: [],
+        total: 0,
+        
+        // Добавление элемента в корзину
+        addItem: function(name, price, button) {
+            // Проверяем, есть ли уже такой элемент в корзине
+            const existingIndex = this.items.findIndex(item => item.name === name && item.price === price);
+            
+            if (existingIndex === -1) {
+                this.items.push({
+                    name: name,
+                    price: price,
+                    button: button
+                });
+                this.total += price;
+                this.updateCart();
+                
+                // Обновляем кнопку
+                if (button) {
+                    button.classList.add('active');
+                    button.textContent = 'Удалить';
+                    button.dataset.inCart = 'true';
+                }
+            }
+        },
+        
+        // Удаление элемента из корзины
+        removeItem: function(index) {
+            if (index >= 0 && index < this.items.length) {
+                const item = this.items[index];
+                this.total -= item.price;
+                
+                // Восстанавливаем кнопку
+                if (item.button) {
+                    item.button.classList.remove('active');
+                    item.button.textContent = 'Записаться';
+                    item.button.dataset.inCart = 'false';
+                }
+                
+                this.items.splice(index, 1);
+                this.updateCart();
+            }
+        },
+        
+        // Обновление отображения корзины
+        updateCart: function() {
+            // Обновляем счетчики
+            document.querySelector('.pricelist__cart__body__servicescount b').textContent = this.items.length;
+            document.querySelector('.pricelist__cart__body__summ b').textContent = this.total.toLocaleString('ru-RU') + ' ₽';
+            
+            // Обновляем список услуг
+            const listContainer = document.querySelector('.pricelist__cart__footer__list');
+            listContainer.innerHTML = '';
+            
+            this.items.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <div class="row flex-nowrap">
+                        <div class="col">
+                            <div class="pricelist__cart__footer__list__text">${item.name}</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="pricelist__cart__footer__list__price">${item.price.toLocaleString('ru-RU')} ₽</div>
+                        </div>
+                        <div class="col-auto">
+                            <button class="pricelist__cart__footer__list__delete" type="button" data-index="${index}">
+                                <svg><use xlink:href="<?=SITE_TEMPLATE_PATH?>/img/icons.svg#ic-delete"></use></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(listItem);
+            });
+            
+            // Добавляем обработчики для кнопок удаления
+            document.querySelectorAll('.pricelist__cart__footer__list__delete').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.removeItem(index);
+                });
+            });
+        }
+    };
+    
+    // Обработчики для кнопок "Записаться/Удалить"
+    document.querySelectorAll('.pricelist__prices__btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const isInCart = this.dataset.inCart === 'true';
+            
+            if (isInCart) {
+                // Удаляем из корзины
+                const itemElement = this.closest('li');
+                const name = itemElement.querySelector('.pricelist__prices__title').textContent;
+                const priceText = itemElement.querySelector('.pricelist__prices__price').textContent;
+                const price = parseInt(priceText.replace(/\s+/g, '').replace(/[^\d]/g, ''));
+                
+                // Находим и удаляем элемент из корзины
+                const index = cart.items.findIndex(item => 
+                    item.name === name && item.price === price && item.button === this);
+                
+                if (index !== -1) {
+                    cart.removeItem(index);
+                }
+            } else {
+                // Добавляем в корзину
+                const itemElement = this.closest('li');
+                const name = itemElement.querySelector('.pricelist__prices__title').textContent;
+                const priceText = itemElement.querySelector('.pricelist__prices__price').textContent;
+                const price = parseInt(priceText.replace(/\s+/g, '').replace(/[^\d]/g, ''));
+                
+                cart.addItem(name, price, this);
+            }
+        });
+    });
+    
+    // Инициализация пустой корзины
+    cart.updateCart();
+});
+</script>
