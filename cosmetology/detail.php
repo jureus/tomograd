@@ -1,26 +1,49 @@
-<?require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');?>
-<section class="block__padd block__padd__pageinfidefirst">
-    <div class="container">
-        <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "tomograd", Array(
-            "PATH" => "/",   // Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
-            "SITE_ID" => "s1",  // Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
-            "START_FROM" => "0",    // Номер пункта, начиная с которого будет построена навигационная цепочка
-            ),
-            false
-        );?>
-        <?$APPLICATION->IncludeComponent(
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("title", "123");
+$APPLICATION->SetTitle("Title");
+$code = $_REQUEST["ELEMENT_CODE"];
+
+$res = CIBlockElement::GetList(
+	[],
+	[
+        'IBLOCK_ID' => 8, // Укажите ваш ID инфоблока
+        'CODE' => $code,
+        'ACTIVE' => 'Y',
+    ],
+    false,
+    false,
+    ['ID', 'IBLOCK_SECTION_ID']
+);
+if ($element = $res->Fetch()) {
+	$elementId = $element['ID'];
+	$iblockId = $element["IBLOCK_SECTION_ID"];
+}
+?>
+<?/*ЭТИ ДВА ТЭГА ЗАКРЫВАЮТСЯ ВНУТРИ NEWS.DETAIL*/?>
+<section class="block__padd block__padd__pageinfidefirst block__overflow">
+	<div class="container">
+		<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "tomograd", Array(
+		            "PATH" => "/",   // Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
+		            "SITE_ID" => "s1",  // Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
+		            "START_FROM" => "0",    // Номер пункта, начиная с которого будет построена навигационная цепочка
+		        ),
+		false
+	);?>
+
+	<?$APPLICATION->IncludeComponent(
 	"bitrix:news.detail", 
-	"banners_inpage", 
+	"service-detail", 
 	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "Y",
+		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"BROWSER_TITLE" => "-",
+		"BROWSER_TITLE" => "NAME",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
@@ -32,19 +55,42 @@
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"ELEMENT_CODE" => "",
-		"ELEMENT_ID" => "89",
+		"ELEMENT_CODE" => $code,
+		"ELEMENT_ID" => $elementId,
 		"FIELD_CODE" => array(
-			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "DETAIL_TEXT",
-			3 => "DETAIL_PICTURE",
-			4 => "",
+			0 => "ID",
+			1 => "CODE",
+			2 => "XML_ID",
+			3 => "NAME",
+			4 => "TAGS",
+			5 => "SORT",
+			6 => "PREVIEW_TEXT",
+			7 => "PREVIEW_PICTURE",
+			8 => "DETAIL_TEXT",
+			9 => "DETAIL_PICTURE",
+			10 => "DATE_ACTIVE_FROM",
+			11 => "ACTIVE_FROM",
+			12 => "DATE_ACTIVE_TO",
+			13 => "ACTIVE_TO",
+			14 => "SHOW_COUNTER",
+			15 => "SHOW_COUNTER_START",
+			16 => "IBLOCK_TYPE_ID",
+			17 => "IBLOCK_ID",
+			18 => "IBLOCK_CODE",
+			19 => "IBLOCK_NAME",
+			20 => "IBLOCK_EXTERNAL_ID",
+			21 => "DATE_CREATE",
+			22 => "CREATED_BY",
+			23 => "CREATED_USER_NAME",
+			24 => "TIMESTAMP_X",
+			25 => "MODIFIED_BY",
+			26 => "USER_NAME",
+			27 => "",
 		),
-		"IBLOCK_ID" => "25",
-		"IBLOCK_TYPE" => "content",
+		"IBLOCK_ID" => "6",
+		"IBLOCK_TYPE" => "services",
 		"IBLOCK_URL" => "",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"MESSAGE_404" => "",
 		"META_DESCRIPTION" => "-",
 		"META_KEYWORDS" => "-",
@@ -54,222 +100,38 @@
 		"PAGER_TITLE" => "Страница",
 		"PROPERTY_CODE" => array(
 			0 => "",
-			1 => "",
+			1 => "PRICE",
+			2 => "DESCRIPTION_TITLE",
+			3 => "DESCRIPTION_VALUE",
+			4 => "PROPERTY_1_TITLE",
+			5 => "PROPERTY_1_VALUE",
+			6 => "PROPERTY_2_TITLE",
+			7 => "PROPERTY_2_VALUE",
+			8 => "PROPERTY_3_TITLE",
+			9 => "PROPERTY_3_VALUE",
+			10 => "SALE_SIZE",
+			11 => "TYPE",
+			12 => "SVG",
+			13 => "SIMPTOMS_IB",
+			14 => "",
 		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"STRICT_SECTION_CHECK" => "N",
-		"USE_PERMISSIONS" => "N",
-		"USE_SHARE" => "N",
-		"COMPONENT_TEMPLATE" => "banners_inpage"
-	),
-	false
-);?>
-    </div>
-</section>
-
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"in_section_page",
-	Array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array("",""),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "8",
-		"IBLOCK_TYPE" => "services",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array("",""),
 		"SET_BROWSER_TITLE" => "Y",
+		"SET_CANONICAL_URL" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
 		"SET_META_KEYWORDS" => "Y",
 		"SET_STATUS_404" => "N",
 		"SET_TITLE" => "Y",
 		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N"
-	)
-);?>
-
-<!-- banner-->
-    <?$APPLICATION->IncludeComponent(
-	"bitrix:news.detail", 
-	"main-single", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"BROWSER_TITLE" => "-",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"ELEMENT_CODE" => "",
-		"ELEMENT_ID" => "71",
-		"FIELD_CODE" => array(
-			0 => "NAME",
-			1 => "DETAIL_TEXT",
-			2 => "DETAIL_PICTURE",
-			3 => "",
-		),
-		"IBLOCK_ID" => "16",
-		"IBLOCK_TYPE" => "actions",
-		"IBLOCK_URL" => "",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"MESSAGE_404" => "",
-		"META_DESCRIPTION" => "-",
-		"META_KEYWORDS" => "-",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Страница",
-		"PROPERTY_CODE" => array(
-			0 => "SALE_SIZE",
-			1 => "LINKED_ITEM",
-			2 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
 		"STRICT_SECTION_CHECK" => "N",
 		"USE_PERMISSIONS" => "N",
 		"USE_SHARE" => "N",
-		"COMPONENT_TEMPLATE" => "main-single"
+		"COMPONENT_TEMPLATE" => "service-detail"
 	),
 	false
 );?>
-<!-- /banner-->
-
-<!-- технологии и оборудование-->
-<!-- блок скрывается в мобилке на главной странице сайта, классы "d-none d-md-block", чтобы это произошло-->
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"main_devices", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "NAME",
-			1 => "DETAIL_TEXT",
-			2 => "DETAIL_PICTURE",
-			3 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "20",
-		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "TEXT_1_TITLE",
-			1 => "TEXT_2_TITLE",
-			2 => "TEXT_3_TITLE",
-			3 => "TEXT_1",
-			4 => "TEXT_2",
-			5 => "TEXT_3",
-			6 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "main_devices"
-	),
-	false
-);?>
-<!-- /технологии и оборудование-->
-
+<? /* для навигации*/?>
+<section id="des_2" data-link="#link_2"></section>
 <!-- специалисты-->
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -344,10 +206,8 @@
 	false
 );?>
 <!-- /специалисты-->
-
-<Форма>
-
-<!-- отзывы-->
+<? /* для навигации*/?>
+<section id="des_3" data-link="#link_3"></section>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"main_reviews", 
@@ -419,6 +279,8 @@
 	false
 );?>
 <!-- /отзывы-->
+<?/*эта секция открывается внутри детальной нужно для навигации*/?>
+</section>
 <!-- рейтинг независимых экспертов-->
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -489,4 +351,4 @@
 	false
 );?>
 <!-- /рейтинг независимых экспертов-->
-<?require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php'); ?>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="catalogservices row">
-                    <? foreach ($arResult["ITEMS"][0]["ITEMS"]as $arItem) {?>
+                    <? foreach ($arResult["ITEMS"][0]["ITEMS"] as $arItem) {?>
                     	<div class="catalogservices__item col-12 col-md-3">
 						    <div class="catalogservices__card">
 						        <picture class="catalogservices__card__img">

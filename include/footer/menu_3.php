@@ -1,0 +1,10 @@
+<li><a href='/services/adultway/ginekologiya/>Гинекология</a></li>
+<li><a href='/services/adultway/andrologiya/'>Урология/андрология</a></li>
+<li><a href='/services/childway/dermatologiya/'>Дерматология</a></li>
+<li><a href=/services/adultway/nevrologiya/'>Неврология</a></li>
+<li><a href='/services/adultway/travmatologiya/'>Травматология</a></li>
+<li><a href='/services/adultway/kardiologiya/'>Кардиология</a></li>
+<li><a href=/local/templates/tomograd/img/welcome/bg-welcome-desktop.svg'>Терапия</a></li>
+<li><a href=/services/adultway/revmatologiya/'>Ревматология</a></li>
+<li><a href=/services/adultway/gastroenterologiya/'>Гастроэнтерология</a></li>
+<li><a href='/services/adultway/khirurgiya/'>Хирургия</a></li>
