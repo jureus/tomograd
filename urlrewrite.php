@@ -24,6 +24,14 @@ $arUrlRewrite=array (
     'PATH' => '/actions/detail.php',
     'SORT' => 100,
   ),
+  11 => 
+  array (
+    'CONDITION' => '#^/news/([a-zA-Z0-9_-]+)/?#',
+    'RULE' => 'CODE=$1',
+    'ID' => '',
+    'PATH' => '/news/detail.php',
+    'SORT' => 100,
+  ),
   3 => 
   array (
     'CONDITION' => '#^/diagnostic/?(\\?.*)?$#',
