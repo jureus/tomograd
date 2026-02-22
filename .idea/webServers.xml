@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="532b23ae-8469-40f4-a574-7a5f9efff633" name="testpodolsk.tomograd.ru" url="https://testpodolsk.tomograd.ru">
+        <fileTransfer rootFolder="/home/bitrix/www" accessType="SFTP" host="217.16.18.211" port="64022" sshConfigId="156cb5e4-8caa-4256-b9df-79f01dd61f14" sshConfig="testpodolsk.tomograd.ru" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

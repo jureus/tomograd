@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="217.16.18.211" id="156cb5e4-8caa-4256-b9df-79f01dd61f14" keyPath="V:\LABSALES\tomograd.ru\КЛЮЧИ ОТ СЕРВАКА\tomograd_s" port="64022" customName="testpodolsk.tomograd.ru" nameFormat="CUSTOM" username="bitrix" useOpenSSHConfig="true">
+        <option name="customName" value="testpodolsk.tomograd.ru" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
